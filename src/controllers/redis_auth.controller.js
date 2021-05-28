@@ -26,7 +26,11 @@ export default {
               });
             })
             .then((res) => {
-          
+
+              if(res[1].length === 0) {
+                 return res.send({msg: 'No Record Found'});
+              }
+              else {
               return new Promise((resolve, reject) => {
                 res[1].forEach((row) => {
                   
@@ -51,14 +55,11 @@ export default {
                    })
                 });
               }); 
+            }
             })
             .then(resPromise => {
               res.send(resPromise);
             })
-
-            let result = makeApiResponce('LoggedIn Successfully', true, OK, userResponce);
-            return res.status(OK).json(result);
-
     },
 
     /**
